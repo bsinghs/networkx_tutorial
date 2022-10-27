@@ -30,11 +30,27 @@ fh = io.BytesIO()
 #G = nx.read_gml("soc-twitter-follows.mtx")
 #G = scipy.io.mmread('soc-twitter-follows.mtx')
 #G = scipy.io.mmread('soc-youtube.mtx')
-with open('soc-youtube.mtx') as mass_file:
-    x = mmread(mass_file)
-    # H = nx.from_numpy_array(mmread(mass_file))
-    # print(H.edges())
-
+with open('soc-youtube copy.mtx') as mass_file:
+    # mat = mmread(mass_file)
+    # mat = mat.toarray()
+    # print(mat[0][0])
+    # G = nx.Graph()	
+    # G.add_nodes_from(mat)
+    #mat = np.matrix(mat.transpose())
+    #H = nx.from_numpy_array(mmread(mass_file))
+    G = nx.from_scipy_sparse_array(mmread(mass_file))
+    nx.draw_networkx(G, pos=nx.circular_layout(G), with_labels=True)
+    pr = nx.pagerank(G, alpha=0.85)
+    pr = dict(sorted(pr.items(), key = lambda item:item[1], reverse=True))
+    top10 = []
+    for key, value in pr.items():
+        if 'i' in key:
+            top10.append(key)
+            if len(top10=10) == 10:
+                break;
+    print(pr.loc[top10])
+    #plt.show()
+    #print(H1[1])
 
 # Draw generated graph
 #nx.draw_networkx(G, pos=nx.circular_layout(G), with_labels=True)

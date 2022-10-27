@@ -15,9 +15,9 @@ from numpy import (asarray, real, imag, conj, zeros, ndarray, concatenate,
 from numpy.compat import asbytes, asstr
 
 #from scipy._lib import six
-from scipy._lib.six import string_types
-
 #from scipy._lib.six import string_types
+
+import six #import string_types
 
 from scipy.sparse import coo_matrix, isspmatrix
 
